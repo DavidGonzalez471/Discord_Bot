@@ -1,5 +1,6 @@
 #building a music cog to organize the code more, not working yet.
 #CommandNotFound on cogs
+
 import discord
 from discord.ext import commands
 from discord import FFmpegPCMAudio
