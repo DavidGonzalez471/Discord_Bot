@@ -19,15 +19,40 @@ class music_bot(commands.Cog):
 
         self.queue = []
         self.vc = None
+        
 
+   @commands.command(name= "play", aliases = ['PLAY', 'Play', 'p' ], pass_context = True)
+   async def play(self, ctx, *args, pass_context = True):
+       query = "".join(args)
 
-    @commands.command(name='hello')
-    async def hello(self, ctx):
-        member = ctx.author
-        await ctx.send(f"Hello, {member.name} I am a discord bot")
+       channel = ctx.author.voice.channel
+       if channel is None:
+           await ctx.send("Connect to a voice channel")
+       elif self.is_paused:
+           self.vc.resume()
+       else:
+           song = self.search_yt(query)
+           if type(song) == type(True):
+               await ctx.send("Couldn't get the song")
+           else:
+               await ctx.send("Song added to queue")
+               self.queue.append([song, channel])
+               if self.is_playing == False:
+                   await self.play(ctx, after= None)
 
-    def search_yt(self, song):
+   @commands.command(name = 'play_next', aliases = ['playnext', 'pn', 'PLAYNEXT', ' queue', 'play next'], pass_context = True)
+   async def play_next(self, ctx, *args, pass_context = True):
+       query = "".join(args)
 
-        YDL_OPTIONS = {"format":"bestaudio", "noplaylist": "True"}
-
-        #with YoutubeDL() 
+       channel = ctx.author.voice.channel
+       if channel is None:
+           await ctx.send("Connect to a voice channel")
+       if self.is_playing == False:
+           await ctx.send("No song playing, play a song.")
+       else:
+           song = self.search_yt(query)
+           if type(song) == type(True):
+               await ctx.send("Couldn't get the song")
+           else:
+               await ctx.send("Song added to the queue")
+               self.music_queue.append([song, channel])
