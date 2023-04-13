@@ -55,7 +55,7 @@ async def leave(ctx):
         await ctx.send("I am not in a voice channel.")
 
 
-'''
+
 def search_yt(self, song):
     
     with YoutubeDL(self.YDL_OPTIONS) as ydl:
@@ -117,7 +117,7 @@ async def play_next(self, ctx, *args, pass_context = True):
         else:
             await ctx.send("Song added to the queue")
             self.music_queue.append([song, channel])
-'''
+
 
 
 
