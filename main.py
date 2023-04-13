@@ -3,8 +3,7 @@ from discord.ext import commands
 from discord import FFmpegPCMAudio
 import yt_dlp
 from yt_dlp import YoutubeDL
-import os
-from dotenv import load_dotenv
+
 
 DISCORD_TOKEN = 'MTA3ODM5OTI5NDg3NDMzMzI3NA.GudrPB.4a43mqI9WF8FjFbA2nVo0VQ_9WfOuZCVkHxYa4'
 
